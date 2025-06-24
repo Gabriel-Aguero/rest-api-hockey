@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import uploadRoutes from "./routes/uploadRoutes.mjs";
 import informesRoutes from "./routes/informesRoutes.mjs";
 import jugadoresRoutes from "./routes/jugadoresRoutes.mjs";
 import clubesRoutes from "./routes/clubesRoutes.mjs";
@@ -32,7 +31,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use("/api/user", userRoutes);
 app.use("/api/categorias", categoriaRoutes);
-app.use("/api", uploadRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/informes", informesRoutes);
 app.use("/api/jugadores", jugadoresRoutes);

@@ -17,7 +17,7 @@ const router = Router();
 router.post("/", authenticateToken, insertJugadoresController);
 
 // obtener todos los jugadores del torneo
-router.get("/jugadoresAll", getJugadoresAllController);
+router.get("/jugadores", getJugadoresAllController);
 
 // obtener todos los jugadores de un club
 router.get("/", getJugadoresController);

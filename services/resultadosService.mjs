@@ -44,19 +44,6 @@ export const getEquiposPorZona = async (torneoId, zonaId) => {
   }
   return data;
 };
-
-// Obtener torneos
-export const getTorneos = async () => {
-  const { data, error } = await supabase.from("torneo").select(`id, nombre`);
-
-  if (error) {
-    console.error("❌ Error al obtener torneos:", error);
-    throw error;
-  }
-  // console.log("✅ Torneos obtenidos:", data);
-  return data;
-};
-
 export const insertarResultado = async (resultado) => {
   try {
     const { data, error } = await supabase
@@ -115,40 +102,6 @@ export const getResultados = async (torneoId, zonaId, categoriaId) => {
 
   return data;
 };
-
-// export const getTablaPosiciones = async (torneoId, zonaId, categoriaId) => {
-//   const { data, error } = await supabase
-//     .from("tabla_posiciones")
-//     .select(
-//       `
-//       torneo: torneo_id (nombre),
-//       zona: zona_id (nombre),
-//       categoria: categoria_id (id, nombre),
-//       perfil: perfil_id (id, club, escudo, alias),
-//       puntos,
-//       partidos_jugados,
-//       partidos_ganados,
-//       partidos_empatados,
-//       partidos_perdidos,
-//       goles_favor,
-//       goles_contra,
-//       diferencia_goles
-//     `
-//     )
-//     .eq("torneo_id", torneoId)
-//     .eq("zona_id", zonaId)
-//     .eq("categoria_id", categoriaId)
-//     .order("puntos", { ascending: false })
-//     .order("diferencia_goles", { ascending: false })
-//     .limit(100); // Limitar el número de resultados (opcional)
-
-//   if (error) {
-//     console.error("❌ Error al obtener resultados:", error);
-//     throw error;
-//   }
-
-//   return data;
-// };
 
 export const getTablaPosiciones = async (torneoId, zonaId, categoriaId) => {
   const { data, error } = await supabase

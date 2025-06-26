@@ -13,6 +13,7 @@ import perfilRoutes from "./routes/perfilRoutes.mjs";
 import estadisticaRoutes from "./routes/estadisticaRoutes.mjs";
 import resultadosRoutes from "./routes/resultadosRoutes.mjs";
 import fixtureRoutes from "./routes/fixtureRoutes.mjs";
+import torneoRoutes from "./routes/torneoRoutes.mjs";
 
 dotenv.config();
 const app = express();
@@ -41,6 +42,7 @@ app.use("/api/perfil", perfilRoutes);
 app.use("/api/estadisticas", estadisticaRoutes);
 app.use("/api/resultados", resultadosRoutes);
 app.use("/api/fixture", fixtureRoutes);
+app.use("/api/torneo", torneoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);

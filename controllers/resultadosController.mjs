@@ -2,7 +2,6 @@ import {
   getZonas,
   getCategoriaPorZona,
   getEquiposPorZona,
-  getTorneos,
   insertarResultado,
   getResultados,
   getTablaPosiciones,
@@ -40,16 +39,6 @@ export const getEquiposPorZonaController = async (req, res) => {
     res.status(200).json(equipos || []);
   } catch (error) {
     console.error("Error al obtener equipos:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-};
-
-export const getTorneosController = async (req, res) => {
-  try {
-    const torneos = await getTorneos();
-    res.status(200).json(torneos || []);
-  } catch (error) {
-    console.error("Error al obtener torneos:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };

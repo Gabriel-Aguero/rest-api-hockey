@@ -4,7 +4,6 @@ import {
   getZonasController,
   getCategoriaPorZonaController,
   getEquiposPorZonaController,
-  getTorneosController,
   insertarResultadoController,
   getResultadosController,
   getTablaPosicionesController,
@@ -16,7 +15,6 @@ import {
 const router = Router();
 
 router.get("/", getResultadosController);
-router.get("/torneo", getTorneosController);
 router.get("/zonas", getZonasController);
 router.get("/categoriaPorZona", getCategoriaPorZonaController);
 router.get("/equiposPorZona", getEquiposPorZonaController);

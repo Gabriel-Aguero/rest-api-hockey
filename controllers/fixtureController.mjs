@@ -2,9 +2,9 @@ import { getFixtures } from "../services/fixtureService.mjs";
 
 export const getFixturesController = async (req, res) => {
   const torneoId = req.query.torneoId;
-  const zonaId = req.query.zonaId;
+  const categoriaId = req.query.categoriaId;
   try {
-    const fixtures = await getFixtures(torneoId, zonaId);
+    const fixtures = await getFixtures(torneoId, categoriaId);
     res.status(200).json(fixtures || []);
   } catch (error) {
     console.error("❌ Error al obtener el fixture:", error);

@@ -1,7 +1,4 @@
-import {
-  getZonas,
-  getCategoriaPorZona,
-  getEquiposPorZona,
+import {    
   insertarResultado,
   getResultados,
   getTablaPosiciones,
@@ -9,39 +6,6 @@ import {
   updateResultado,
   deleteResultado,
 } from "../services/resultadosService.mjs";
-
-export const getZonasController = async (req, res) => {
-  try {
-    const zonas = await getZonas();
-    res.status(200).json(zonas || []);
-  } catch (error) {
-    console.error("Error al obtener zonas:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-};
-
-export const getCategoriaPorZonaController = async (req, res) => {
-  const zonaId = req.query.zonaId;
-  try {
-    const categorias = await getCategoriaPorZona(zonaId);
-    res.status(200).json(categorias || []);
-  } catch (error) {
-    console.error("Error al obtener categorias:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-};
-
-export const getEquiposPorZonaController = async (req, res) => {
-  const torneoId = req.query.torneoId;
-  const zonaId = req.query.zonaId;
-  try {
-    const equipos = await getEquiposPorZona(torneoId, zonaId);
-    res.status(200).json(equipos || []);
-  } catch (error) {
-    console.error("Error al obtener equipos:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-};
 
 export const insertarResultadoController = async (req, res) => {
   const resultado = req.body;
@@ -61,20 +25,6 @@ export const getResultadosController = async (req, res) => {
   // const fecha = req.query.fecha;
   try {
     const resultados = await getResultados(torneoId, zonaId, categoriaId);
-    res.status(200).json(resultados || []);
-  } catch (error) {
-    console.error("Error al obtener torneos:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
-  }
-};
-
-export const getTablaPosicionesController = async (req, res) => {
-  const torneoId = req.query.torneoId;
-  const zonaId = req.query.zonaId;
-  const categoriaId = req.query.categoriaId;
-  // const fecha = req.query.fecha;
-  try {
-    const resultados = await getTablaPosiciones(torneoId, zonaId, categoriaId);
     res.status(200).json(resultados || []);
   } catch (error) {
     console.error("Error al obtener torneos:", error);
@@ -112,6 +62,20 @@ export const deleteResultadoController = async (req, res) => {
     res.status(200).json(resultados || []);
   } catch (error) {
     console.error("Error al obtener torneos:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+export const getTablaPosicionesController = async (req, res) => {
+  const torneoId = req.query.torneoId;
+  const categoriaId = req.query.categoriaId;
+  const partido = req.query.partido;
+  
+  try {
+    const resultados = await getTablaPosiciones(torneoId, categoriaId, partido);
+    res.status(200).json(resultados || []);
+  } catch (error) {
+    console.error("Error al obtener la tabla de posiciones:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };

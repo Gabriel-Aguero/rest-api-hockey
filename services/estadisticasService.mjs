@@ -62,7 +62,7 @@ export const getCategoriasMasJugadores = async () => {
 
 export const getJugadoresPorClubCategoria = async () => {
   const { error, data } = await supabase
-    .from("jugadores_por_club_y_categoria_totales")
+    .from("jugadores_por_club_y_categoria")
     .select(`*`);
 
   if (error) {

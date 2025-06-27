@@ -1,27 +1,21 @@
 import express from "express";
 import { Router } from "express";
-import {
-  getZonasController,
-  getCategoriaPorZonaController,
-  getEquiposPorZonaController,
+import {    
   insertarResultadoController,
   getResultadosController,
-  getTablaPosicionesController,
   getResultadoByIdController,
   updateResultadoController,
   deleteResultadoController,
+  getTablaPosicionesController,
 } from "../controllers/resultadosController.mjs";
 
 const router = Router();
 
 router.get("/", getResultadosController);
-router.get("/zonas", getZonasController);
-router.get("/categoriaPorZona", getCategoriaPorZonaController);
-router.get("/equiposPorZona", getEquiposPorZonaController);
-router.get("/obtenerResultado", getResultadoByIdController);
-router.get("/tablaPosiciones", getTablaPosicionesController);
 router.post("/insertarResultado", insertarResultadoController);
+router.get("/obtenerResultado", getResultadoByIdController);
 router.put("/updateResultado", updateResultadoController);
 router.delete("/deleteResultado", deleteResultadoController);
+router.get("/tablaPosiciones", getTablaPosicionesController);
 
 export default router;

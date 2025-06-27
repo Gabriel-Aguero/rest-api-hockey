@@ -1,13 +1,12 @@
 import supabase from "../config/supabase.mjs";
 
-
 export const insertarResultado = async (resultado) => {
   try {
     const { data, error } = await supabase
       .from("partidos")
       .insert([
         {
-          torneo_id: resultado.torneo_id,          
+          torneo_id: resultado.torneo_id,
           categoria_id: resultado.categoria_id,
           fecha: resultado.fecha,
           partido: resultado.partido,
@@ -38,14 +37,14 @@ export const getResultados = async (torneoId, categoriaId, partido) => {
       torneo (nombre),      
       categorias (id, nombre),
       fecha,      
-      equipo_local:perfiles!equipo_local (id, club, escudo, alias),
-      equipo_visitante:perfiles!equipo_visitante (id, club, escudo, alias),
+      equipo_local:equipos!equipo_local (id, nombre, alias, escudo),
+      equipo_visitante:equipos!equipo_visitante (id, nombre, alias, escudo),
       goles_local,
       goles_visitante,
       estado
     `
     )
-    .eq("torneo_id", torneoId)        
+    .eq("torneo_id", torneoId)
     .eq("categoria_id", categoriaId)
     .eq("partido", partido)
     // .order("fecha", { ascending: false }) // Ordenar por fecha (más reciente primero)
@@ -68,8 +67,8 @@ export const getResultadoById = async (resultadoId) => {
       categorias (id, nombre),
       fecha,
       partido,
-      equipo_local:perfiles!equipo_local (id, club, escudo, alias),
-      equipo_visitante:perfiles!equipo_visitante (id, club, escudo, alias),
+      equipo_local:equipos!equipo_local (id, nombre, alias, escudo),
+      equipo_visitante:equipos!equipo_visitante (id, nombre, alias, escudo),
       goles_local,
       goles_visitante,
       estado
@@ -90,7 +89,7 @@ export const updateResultado = async (resultado, resultadoId) => {
     const { data, error } = await supabase
       .from("partidos")
       .update({
-        torneo_id: resultado.torneo_id,        
+        torneo_id: resultado.torneo_id,
         categoria_id: resultado.categoria_id,
         fecha: resultado.fecha,
         partido: resultado.partido,
@@ -133,7 +132,7 @@ export const getTablaPosiciones = async (torneoId, categoriaId) => {
   const { data, error } = await supabase
     .from("vista_tabla_posiciones_completa")
     .select("*")
-    .eq("torneo_id", torneoId)    
+    .eq("torneo_id", torneoId)
     .eq("categoria_id", categoriaId)
     .order("puntos", { ascending: false })
     .order("partidos_jugados", { ascending: false })
@@ -145,13 +144,13 @@ export const getTablaPosiciones = async (torneoId, categoriaId) => {
   }
 
   return data.map((item) => ({
-    torneo: { nombre: item.torneo_nombre },    
+    torneo: { nombre: item.torneo_nombre },
     categoria: { id: item.categoria_id, nombre: item.categoria_nombre },
-    perfil: {
-      id: item.perfil_id,
-      club: item.club,
-      escudo: item.escudo,
-      alias: item.alias,
+    equipos: {
+      id: item.equipos.id,
+      club: item.equipos.nombre,
+      alias: item.equipos.alias,
+      escudo: item.equipos.escudo,
     },
     puntos: item.puntos,
     partidos_jugados: item.partidos_jugados,

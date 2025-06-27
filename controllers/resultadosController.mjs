@@ -1,4 +1,4 @@
-import {    
+import {
   insertarResultado,
   getResultados,
   getTablaPosiciones,
@@ -20,11 +20,10 @@ export const insertarResultadoController = async (req, res) => {
 
 export const getResultadosController = async (req, res) => {
   const torneoId = req.query.torneoId;
-  const zonaId = req.query.zonaId;
   const categoriaId = req.query.categoriaId;
-  // const fecha = req.query.fecha;
+  const partido = req.query.partido;
   try {
-    const resultados = await getResultados(torneoId, zonaId, categoriaId);
+    const resultados = await getResultados(torneoId, categoriaId, partido);
     res.status(200).json(resultados || []);
   } catch (error) {
     console.error("Error al obtener torneos:", error);
@@ -70,7 +69,7 @@ export const getTablaPosicionesController = async (req, res) => {
   const torneoId = req.query.torneoId;
   const categoriaId = req.query.categoriaId;
   const partido = req.query.partido;
-  
+
   try {
     const resultados = await getTablaPosiciones(torneoId, categoriaId, partido);
     res.status(200).json(resultados || []);
